@@ -1,0 +1,33 @@
+#################################################
+##                                             ##
+##                 PinkiRanks                  ##
+##                                             ##
+#################################################
+
+##Replacer text file
+##Made in google translator Uwu
+
+##Place the replaces you want inside the game here
+##if you do not put it in this list the replace will not be enabled
+##
+##It replaces what the players send in the chat for another word
+replaces:
+- heart
+- lol
+- fuck
+
+##You do not need me to explain this, right? :v
+heart:
+  from: '<3'
+  to: '&4&l❤'
+  required-permission: 'PinkiRanks.heart'
+  
+lol:
+  from: 'lol'
+  to: 'JAJAJA xD'
+  required-permission: 'PinkiRanks.rank-admin'
+  
+fuck:
+  from: 'fuck'
+  to: '!#@##*'
+  required-permission: ''

@@ -1,0 +1,101 @@
+#################################################
+##                                             ##
+##                 PinkiRanks                  ##
+##                                             ##
+#################################################
+
+##General Configuration file
+##Made in google translator Uwu
+
+##In true, when using the command /reload, to avoid bugs the server automatically restarts
+##if it disabled will kick the players when using the command
+force-restart-on-reload: true
+
+##If the previous option is false
+##it will show the following message when kicking
+on-reload-kick-message: 'The server is reloading, enter in a few moments!'
+
+
+general:
+  ##Use the tab list feature
+  use-tablist: true
+  ##Use the nametag feature (above the player)
+  use-nametags: true
+  ##In true, hide the nametag under water
+  hide-nametag-underwater: false
+  ##Update delay in ticks
+  update-delay: 2
+  ##Priority in the tab list when it is marked false in the ranks file
+  no-tablist-rank-priority: 1
+  ##In true, forces to uses the prefix /pinkiranks (/pr) before each command (it is necessary to reload the server)
+  only-subcommands: false
+  
+##In true, shows the nametag of the same player above of him
+##CAN CAUSE BUGS, IT IS RECOMENDED ONLY FOR TESTS
+  see-proper-nametag: false
+
+messages:
+  no-permission: '&cYou do not have permission to use this command'
+  no-console: 'This command can only be used by players!'
+  player-no-exist: '&cThe player does not exist!'
+  command-no-exist: '&cThis command does not exist! use /pr to see available commands'
+  too-many-arguments: '&cToo many arguments!'
+  reload: '&dPinkiRanks has been reloaded'
+  remove-namers: '&dAll name-creating entities have been removed'
+  change-nick: '&dNickname changed!'
+  nick-equals-otherplayername: '&cThe new name can not be the same as other player!'
+  nick-equals-playername: '&cThe new name cannot be the same as the players! If you intended to reset the players name, use nick reset command!'
+  reset-nick: '&dNickname successfully rebooted!'
+  nick-too-long: '&cThe nickname is too long, it must have a maximum of 16 characters!'
+  use-subcommand-nick: '&dUse /pr nick nickname or /pr nick player nickname, /pr nick reset for reboot'
+  use-command-nick: '&dUse /nick nickname or /nick player nickname, /nick reset for reboot'
+##help messages
+  help-header: '&e----- &r&d&oPinki&r&6&lRanks &r&e------'
+  help-pr: '&ePinkiRanks main commad'
+  help-nick: '&eChange nickname'
+  help-nick-reset: '&eReboot nickname'
+  help-remove-namers: '&eRemove floating ghost names'
+  help-reload: '&eReload PinkiRanks'
+  help-footer: '&e----------------------'
+
+mentions:
+  ##In true, notify players when their name is written in the chat
+  enabled: true
+  ##In true, highlight the name of the players when notifying them	
+  highlight: true
+  ##Prefix when highlighting
+  prefix: '&a#&o&n'
+  ##In true, player can mention their own name
+  self-mention: false
+  notify:
+    ##In true, send a message to the mentioned
+    enabled: true
+    ##Use {SENDER} to refer to sender
+    message: '&9&o{SENDER} mentioned you!'
+  sound:
+    ##In true, send a sound to the mentioned
+    enabled: true
+    ## https://hub.spigot.org/javadocs/spigot/org/bukkit/Sound.html
+    sound: BLOCK_NOTE_BLOCK_PLING
+    ##Values from 0.0 to 2.0
+    pitch: 1
+
+chat:
+  ##In true, use the layout defined by PinkiRanks
+  use-layout: true
+  layout: '&7{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+  ##In true, use the layout set in the ranks file
+  per-rank-layout: true	
+  world-specific-layout:
+    ##In true, use specific layouts by world
+    enabled: false
+    world: '&7{WORLD}|{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+    world_nether: '&7{WORLD}|{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+    world_the_end: '&7{WORLD}|{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+  ##Custom_world: '&7{WORLD}|{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+  ##Custom_world_2: '&7{WORLD}|{PREFIX}{PLAYER}{SUFFIX}&r: {MESSAGE}'
+  sound:
+    ##In true, send a sound when sending a message
+    enabled: true
+    ## https://hub.spigot.org/javadocs/spigot/org/bukkit/Sound.html
+    sound: UI_BUTTON_CLICK

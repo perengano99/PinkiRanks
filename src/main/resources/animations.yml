@@ -1,0 +1,55 @@
+#################################################
+##                                             ##
+##                 PinkiRanks                  ##
+##                                             ##
+#################################################
+
+##Animations file
+##Made in google translator Uwu
+
+##Place the animations you want inside the game here
+##if you do not put it in this list the animation will not be enabled
+animations:
+## - custom
+- test
+
+##custom:
+##  - ''
+##	- 'put'
+##  - 'put anim'
+##  - 'put animation'
+##	- 'put animation here'
+##	- 'put animation here'
+##	- 'put animation here'
+##	- 'put animation here'
+##	- 'put animation here'
+##	- 'put animation here'
+##	- '        :D        '
+##	- '        :D        '
+##	- '        :D        '
+##	- '        :D        '
+##	- '        :D        '
+##	- '        :D        '
+
+test:
+- ''
+- ''
+- ''
+- ''
+- 't'
+- 'te'
+- 'tes'
+- 'test'
+- 'test'
+- 'test'
+- 'test'
+- 'test'
+- 'test'
+- 'test'
+- 'tes'
+- 'te'
+- 't'
+- ''
+- ''
+- ''
+- ''

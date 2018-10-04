@@ -1,0 +1,20 @@
+#################################################
+##                                             ##
+##                 PinkiRanks                  ##
+##                                             ##
+#################################################
+
+##nicks file
+##Made in google translator Uwu
+
+##Players with nicknames will be registered here
+##you can change, add, or remove nicknames from here
+##
+##If you delete all nicknames leave the list like this:
+## nicks: []
+##if you will add nicknames, delete the []
+##
+##
+##Nicknames must be a maximum of 16 characters excluding color codes
+nicks: []
+## - 'perengano99: &8&o&nScarletto&r'

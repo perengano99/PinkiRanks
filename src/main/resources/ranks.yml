@@ -1,0 +1,76 @@
+#################################################
+##                                             ##
+##                 PinkiRanks                  ##
+##                                             ##
+#################################################
+
+##Ranks file
+##Made in google translator Uwu
+
+##Place the ranks you want inside the game here
+##if you do not put it in this list the rank will not be enabled
+##if the players have op, they will seek to place the highest rank that does not have bypass-op
+##the order is from top to bottom
+ranks:
+- admin
+- default
+
+##custom:
+##  prefix: 'put prefix here'
+##  suffix: '&dput suffix here'
+##  message-color: '&dput color code'    |(Only color codes support)
+##  chat-layout: '{PREFIX}{PLAYER}{SUFFIX}: {MESSAGE}'    |Rank chat layout
+##  bypass-OP: false    |In true, if the player has op, he will avoid placing this rank
+##  nametag:
+##    enabled: true    |In true, it allows to edit the nametag of the player
+##    animated: true    |In true, enable animations for nametag in this rank
+##    prefix: 'put nametag prefix or animation here'    |To put animations place "{name of the animation}"  Example: "prefix: 'this is anim {custom}'"
+##    suffix: '&dput nametag suffix or animation here'
+##    color: '&dput color code'    |(Only color codes support)
+##  tablist:
+##    enabled: true    |In true, allows to edit the name of the player in the tab list
+##    animated: true    ||In true, enable animations for tab list in this rank
+##    prefix: 'put nametag prefix or animation here'    |To put animations place "{name of the animation}"  Example: "prefix: 'this is anim {custom}'"
+##    suffix: '&dput nametag suffix or animation here'
+##    tab-priority: 20    |Establishes the order in the tab list, the larger the number, the higher it will be in the list
+##  required-permission: 'put your custom permission here'
+
+default:
+  prefix: '&7'
+  suffix: ''
+  message-color: '&7'
+  chat-layout: '{PREFIX}{PLAYER}{SUFFIX}: {MESSAGE}'
+  bypass-OP: false
+  nametag:
+    enabled: true
+    animated: false
+    prefix: ''
+    suffix: ''
+    color: '&7'
+  tablist:
+    enabled: true
+    animated: false
+    prefix: '&7'
+    suffix: ''
+    tab-priority: 10
+  required-permission: ''
+  
+admin:
+  prefix: '&7[&cAdmin&7] &e'
+  suffix: ''
+  message-color: '&c'
+  chat-layout: '{PREFIX} {PLAYER} {SUFFIX}: {MESSAGE}'
+  bypass-OP: true
+  nametag:
+    enabled: true
+    animated: true
+    prefix: '{PREFIX}'
+    suffix: ' {test}'
+    color: '&e&o'
+  tablist:
+    enabled: true
+    animated: true
+    prefix: '{test} &e'
+    suffix: ' &7[&cAD&7]'
+    tab-priority: 200
+  required-permission: 'PinkiChats.rank-admin'
