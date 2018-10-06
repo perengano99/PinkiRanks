@@ -21,8 +21,8 @@ public class FileManager extends PC {
 	public static HashMap<String, Boolean> newFile = Maps.newHashMap();
 
 	public static void loadFiles() {
-		AnimationsFile.loadFile();
 		ConfigFile.loadFile();
+		AnimationsFile.loadFile();
 		ReplacerTextFile.loadFile();
 		RanksFile.loadFile();
 		NicksFile.loadFile();

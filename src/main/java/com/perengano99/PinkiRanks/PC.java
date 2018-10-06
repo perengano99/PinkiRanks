@@ -55,14 +55,13 @@ public class PC extends JavaPlugin implements Listener {
 		PC.p.log("");
 		PC.p.log("");
 		PC.p.log("--------------------");
+		FileManager.loadFiles();
 
 		if (!getConfig().getBoolean("general.only-subcommands", true)) {
 			ccapi.newCommand(this, "nick", new NIckCmd());
 		}
 		ccapi.newRootCommand(this, "pinkiranks", new PRRootCommand(), new PLIBSubCommand[]{new NickSubCmd("nick"), new RemoveNamersCmd("removenamers"), new ReloadSubCmd("reload")});
 
-		FileManager.loadFiles();
-		
 		Bukkit.getPluginManager().registerEvents(this, this);
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		Bukkit.getPluginManager().registerEvents(new updaterUtil(), this);

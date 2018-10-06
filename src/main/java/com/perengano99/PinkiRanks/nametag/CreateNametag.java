@@ -93,6 +93,7 @@ public class CreateNametag implements Listener {
 							if (!ConfigFile.getConfig().getBoolean("general.see-proper-nametag", true)) {
 								PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(
 										newNamer.getEntityId());
+								player.sendMessage("dada");
 								((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 							}
 
@@ -123,6 +124,7 @@ public class CreateNametag implements Listener {
 							namerMob.put(player.getUniqueId(), customEnt);
 
 							if (!ConfigFile.getConfig().getBoolean("general.see-proper-nametag", true)) {
+								player.sendMessage("dada");
 								PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(
 										newNamer.getEntityId());
 								((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
@@ -150,11 +152,6 @@ public class CreateNametag implements Listener {
 						return;
 					}
 					
-					if (!ConfigFile.getConfig().getBoolean("general.see-proper-nametag", true)) {
-						PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(namer.getEntityId());
-						((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-					}
-
 					String name;
 
 					String playerName;
