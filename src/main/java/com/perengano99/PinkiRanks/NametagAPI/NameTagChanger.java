@@ -133,7 +133,7 @@ public class NameTagChanger {
 				packetHandler.sendTabListRemovePacket(player, otherPlayer);
 				packetHandler.sendTabListAddPacket(player, newProfile, otherPlayer);
 				if (otherPlayer.getWorld().equals(player.getWorld())) {
-					packetHandler.sendEntityDestroyPacket(player, otherPlayer);
+					packetHandler.sendEntityDestroyPacket(player.getEntityId(), otherPlayer);
 					packetHandler.sendNamedEntitySpawnPacket(player, otherPlayer);
 					packetHandler.sendEntityEquipmentPacket(player, otherPlayer);
 				}

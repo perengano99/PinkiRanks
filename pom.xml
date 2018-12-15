@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.perengano99</groupId>
-	<artifactId>PinkiChats</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>PinkiRanks</artifactId>
+	<version>dev-build</version>
 	<packaging>jar</packaging>
 
 	<name>PinkiChats</name>
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>com.perengano99</groupId>
 			<artifactId>PinkiLibraries</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>dev-build</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
-			<version>1.13-R0.1-SNAPSHOT</version>
+			<version>1.13.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>

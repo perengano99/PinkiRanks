@@ -155,8 +155,8 @@ public class ChannelPacketHandler extends PacketInterceptor implements IPacketHa
     }
 
     @Override
-    public void sendEntityDestroyPacket(Player playerToDestroy, Player seer) {
-        Object packet = ReflectUtil.invokeConstructor(PACKET_ENTITY_DESTROY_CONSTRUCTOR, (Object) new int[] {playerToDestroy.getEntityId()}).getOrThrow();
+    public void sendEntityDestroyPacket(int entityToDestroyID, Player seer) {
+        Object packet = ReflectUtil.invokeConstructor(PACKET_ENTITY_DESTROY_CONSTRUCTOR, (Object) new int[] {entityToDestroyID}).getOrThrow();
         sendPacket(seer, packet);
     }
 

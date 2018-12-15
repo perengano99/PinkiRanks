@@ -7,7 +7,7 @@ public interface IPacketHandler {
 
     void sendTabListAddPacket(Player playerToAdd, GameProfileWrapper newProfile, Player seer);
 
-    void sendEntityDestroyPacket(Player playerToDestroy, Player seer);
+    void sendEntityDestroyPacket(int entityToDestroyID, Player seer);
 
     void sendNamedEntitySpawnPacket(Player playerToSpawn, Player seer);
 

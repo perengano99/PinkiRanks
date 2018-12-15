@@ -63,7 +63,6 @@ public class FileManager extends PC {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				pc.log("[Factions] Couldn't create language file.");
 			} finally {
 				if (defLangStream != null) {
 					try {

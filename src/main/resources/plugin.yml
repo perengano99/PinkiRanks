@@ -1,6 +1,6 @@
 name: PinkiRanks
 main: com.perengano99.PinkiRanks.PC
-version: 0.0.1
+version: 1.0.1
 author: [perengano99]
 description: A system to highlight the ranges blessed by Pinki
 depend: [PinkiLibraries]

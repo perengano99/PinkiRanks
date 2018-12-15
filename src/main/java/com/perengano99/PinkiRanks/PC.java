@@ -29,189 +29,190 @@ import com.perengano99.PinkiRanks.nametag.NametagUtil;
 import com.perengano99.PinkiRanks.util.updaterUtil;
 
 public class PC extends JavaPlugin implements Listener {
-
-	public static PC p;
-	private static Plugin plugin;
-
-	public static NameTagChanger tag;
-	public static CommandCreatorAPI ccapi = PLIB.CommandCreatorAPI;
-
-	public PC() {
-		p = this;
+    
+    public static PC p;
+    private static Plugin plugin;
+    
+    public static NameTagChanger tag;
+    public static CommandCreatorAPI ccapi = PLIB.CommandCreatorAPI;
+    
+    public PC() {
+	p = this;
+    }
+    
+    public static Plugin getPlugin() {
+	return plugin;
+    }
+    
+    @Override
+    public void onEnable() {
+	
+	PC.p.log("--------------------");
+	PC.p.log("");
+	PC.p.log("");
+	PC.p.log(PC.p.getName());
+	PC.p.log("Loading " + PC.p.getName());
+	PC.p.log("");
+	PC.p.log("");
+	PC.p.log("--------------------");
+	FileManager.loadFiles();
+	
+	if (!getConfig().getBoolean("general.only-subcommands", true)) {
+	    ccapi.newCommand(this, "nick", new NIckCmd());
 	}
-
-	public static Plugin getPlugin() {
-		return plugin;
+	ccapi.newRootCommand(this, "pinkiranks", new PRRootCommand(),
+		new PLIBSubCommand [] { new NickSubCmd("nick"), new RemoveNamersCmd("removenamers"), new ReloadSubCmd("reload") });
+	
+	Bukkit.getPluginManager().registerEvents(this, this);
+	Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+	Bukkit.getPluginManager().registerEvents(new updaterUtil(), this);
+	Bukkit.getPluginManager().registerEvents(new CreateNametag(), this);
+	
+	updaterUtil.update();
+	
+	super.onEnable();
+	
+	PC.p.log("--------------------");
+	PC.p.log("");
+	PC.p.log(PC.p.getName() + " loaded");
+	PC.p.log("");
+	PC.p.log("--------------------");
+	
+    }
+    
+    @Override
+    public void onDisable() {
+    }
+    
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+	Player player = event.getPlayer();
+	if (NametagUtil.isRenamed(player) == true) {
+	    String nametag = NametagUtil.getNickName(player);
+	    NameTagChanger.changePlayerName(player, nametag);
+	    NametagUtil.playersRenamed.put(player.getUniqueId(), true);
 	}
-
-	@Override
-	public void onEnable() {
-
-		PC.p.log("--------------------");
-		PC.p.log("");
-		PC.p.log("");
-		PC.p.log(PC.p.getName());
-		PC.p.log("Loading " + PC.p.getName());
-		PC.p.log("");
-		PC.p.log("");
-		PC.p.log("--------------------");
-		FileManager.loadFiles();
-
-		if (!getConfig().getBoolean("general.only-subcommands", true)) {
-			ccapi.newCommand(this, "nick", new NIckCmd());
+	
+    }
+    
+    @EventHandler
+    public void preventConsoleServerReload(ServerCommandEvent event) {
+	
+	if (event.getCommand().equalsIgnoreCase("reload")) {
+	    if (getConfig().getBoolean("force-restart-on-reload", true)) {
+		log(Level.WARNING, this.getName() + " does not accept /reload command, restarting the server");
+		event.setCommand("restart");
+	    } else {
+		log(Level.WARNING, this.getName() + " does not accept /reload command, kicking players, it is recomended to restart the server!");
+		for (Player players : getServer().getOnlinePlayers()) {
+		    players.kickPlayer(getConfig().getString("on-reload-kick-message"));
 		}
-		ccapi.newRootCommand(this, "pinkiranks", new PRRootCommand(), new PLIBSubCommand[]{new NickSubCmd("nick"), new RemoveNamersCmd("removenamers"), new ReloadSubCmd("reload")});
-
-		Bukkit.getPluginManager().registerEvents(this, this);
-		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
-		Bukkit.getPluginManager().registerEvents(new updaterUtil(), this);
-		Bukkit.getPluginManager().registerEvents(new CreateNametag(), this);
-		
-		updaterUtil.update();
-		
-		super.onEnable();
-
-		PC.p.log("--------------------");
-		PC.p.log("");
-		PC.p.log(PC.p.getName() + " loaded");
-		PC.p.log("");
-		PC.p.log("--------------------");
-
+	    }
+	    
 	}
-
-	@Override
-	public void onDisable() {
+	
+    }
+    
+    @EventHandler
+    public void prevetnPlayerServerReload(PlayerCommandPreprocessEvent event) {
+	if (event.getMessage().equalsIgnoreCase("/reload")) {
+	    if (getConfig().getBoolean("force-restart-on-reload", true)) {
+		log(Level.WARNING, this.getName() + " does not accept /reload command, restarting the server");
+		event.setMessage("/restart");
+	    } else {
+		log(Level.WARNING, this.getName() + " does not accept /reload command, kicking players, it is recomended to restart the server!");
+		for (Player players : getServer().getOnlinePlayers()) {
+		    players.kickPlayer(getConfig().getString("on-reload-kick-message"));
+		}
+	    }
 	}
-
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
-		if (NametagUtil.isRenamed(player) == true) {
-			String nametag = NametagUtil.getNickName(player);
-			NameTagChanger.changePlayerName(player, nametag);
-			NametagUtil.playersRenamed.put(player.getUniqueId(), true);
-		}
-
+    }
+    
+    public void log(String msg) {
+	Bukkit.getLogger().log(Level.INFO, msg);
+    }
+    
+    public void log(Object invoke) {
+	Bukkit.getLogger().log(Level.INFO, "", invoke);
+	
+    }
+    
+    public void log(Level level, String msg) {
+	Bukkit.getLogger().log(level, "[" + this.getDescription().getFullName() + "] " + msg);
+    }
+    
+    public String color(String string) {
+	return ChatColor.translateAlternateColorCodes('&', string);
+    }
+    
+    public String nocolor(String string) {
+	if (string.contains("&a")) {
+	    string = string.replace("&a", "");
 	}
-
-	@EventHandler
-	public void preventConsoleServerReload(ServerCommandEvent event) {
-
-		if (event.getCommand().equalsIgnoreCase("reload")) {
-			if (getConfig().getBoolean("force-restart-on-reload", true)) {
-				log(Level.WARNING, this.getName() + " does not accept /reload command, restarting the server");
-				event.setCommand("restart");
-			} else {
-				log(Level.WARNING, this.getName() + " does not accept /reload command, kicking players, it is recomended to restart the server!");
-				for (Player players : getServer().getOnlinePlayers()) {
-					players.kickPlayer(getConfig().getString("on-reload-kick-message"));
-				}
-			}
-
-		}
-
+	if (string.contains("&b")) {
+	    string = string.replace("&b", "");
 	}
-
-	@EventHandler
-	public void prevetnPlayerServerReload(PlayerCommandPreprocessEvent event) {
-		if (event.getMessage().equalsIgnoreCase("/reload")) {
-			if (getConfig().getBoolean("force-restart-on-reload", true)) {
-				log(Level.WARNING, this.getName() + " does not accept /reload command, restarting the server");
-				event.setMessage("/restart");
-			} else {
-				log(Level.WARNING, this.getName() + " does not accept /reload command, kicking players, it is recomended to restart the server!");
-				for (Player players : getServer().getOnlinePlayers()) {
-					players.kickPlayer(getConfig().getString("on-reload-kick-message"));
-				}
-			}
-		}
+	if (string.contains("&c")) {
+	    string = string.replace("&c", "");
 	}
-
-	public void log(String msg) {
-		Bukkit.getLogger().log(Level.INFO, msg);
+	if (string.contains("&d")) {
+	    string = string.replace("&d", "");
 	}
-
-	public void log(Object invoke) {
-		Bukkit.getLogger().log(Level.INFO, "", invoke);
-
+	if (string.contains("&e")) {
+	    string = string.replace("&e", "");
 	}
-
-	public void log(Level level, String msg) {
-		Bukkit.getLogger().log(level, "[" + this.getDescription().getFullName() + "] " + msg);
+	if (string.contains("&f")) {
+	    string = string.replace("&f", "");
 	}
-
-	public String color(String string) {
-		return ChatColor.translateAlternateColorCodes('&', string);
+	if (string.contains("&1")) {
+	    string = string.replace("&1", "");
 	}
-
-	public String nocolor(String string) {
-		if (string.contains("&a")) {
-			string = string.replace("&a", "");
-		}
-		if (string.contains("&b")) {
-			string = string.replace("&b", "");
-		}
-		if (string.contains("&c")) {
-			string = string.replace("&c", "");
-		}
-		if (string.contains("&d")) {
-			string = string.replace("&d", "");
-		}
-		if (string.contains("&e")) {
-			string = string.replace("&e", "");
-		}
-		if (string.contains("&f")) {
-			string = string.replace("&f", "");
-		}
-		if (string.contains("&1")) {
-			string = string.replace("&1", "");
-		}
-		if (string.contains("&2")) {
-			string = string.replace("&2", "");
-		}
-		if (string.contains("&3")) {
-			string = string.replace("&3", "");
-		}
-		if (string.contains("&4")) {
-			string = string.replace("&4", "");
-		}
-		if (string.contains("&5")) {
-			string = string.replace("&5", "");
-		}
-		if (string.contains("&6")) {
-			string = string.replace("&6", "");
-		}
-		if (string.contains("&7")) {
-			string = string.replace("&7", "");
-		}
-		if (string.contains("&8")) {
-			string = string.replace("&8", "");
-		}
-		if (string.contains("&9")) {
-			string = string.replace("&9", "");
-		}
-		if (string.contains("&0")) {
-			string = string.replace("&0", "");
-		}
-		if (string.contains("&n")) {
-			string = string.replace("&n", "");
-		}
-		if (string.contains("&o")) {
-			string = string.replace("&o", "");
-		}
-		if (string.contains("&m")) {
-			string = string.replace("&m", "");
-		}
-		if (string.contains("&k")) {
-			string = string.replace("&k", "");
-		}
-		if (string.contains("&l")) {
-			string = string.replace("&l", "");
-		}
-
-		string = ChatColor.stripColor(string);
-
-		return string;
+	if (string.contains("&2")) {
+	    string = string.replace("&2", "");
 	}
-
+	if (string.contains("&3")) {
+	    string = string.replace("&3", "");
+	}
+	if (string.contains("&4")) {
+	    string = string.replace("&4", "");
+	}
+	if (string.contains("&5")) {
+	    string = string.replace("&5", "");
+	}
+	if (string.contains("&6")) {
+	    string = string.replace("&6", "");
+	}
+	if (string.contains("&7")) {
+	    string = string.replace("&7", "");
+	}
+	if (string.contains("&8")) {
+	    string = string.replace("&8", "");
+	}
+	if (string.contains("&9")) {
+	    string = string.replace("&9", "");
+	}
+	if (string.contains("&0")) {
+	    string = string.replace("&0", "");
+	}
+	if (string.contains("&n")) {
+	    string = string.replace("&n", "");
+	}
+	if (string.contains("&o")) {
+	    string = string.replace("&o", "");
+	}
+	if (string.contains("&m")) {
+	    string = string.replace("&m", "");
+	}
+	if (string.contains("&k")) {
+	    string = string.replace("&k", "");
+	}
+	if (string.contains("&l")) {
+	    string = string.replace("&l", "");
+	}
+	
+	string = ChatColor.stripColor(string);
+	
+	return string;
+    }
+    
 }

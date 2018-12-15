@@ -372,7 +372,7 @@ public class ReflectUtil {
                 return new ReflectionResponse<>("null");
             }
             if (object instanceof Multimap) {
-                object = ((Multimap) object).asMap();
+                object = ((Multimap<?, ?>) object).asMap();
             }
             if (object instanceof Map) {
                 StringBuilder str = new StringBuilder("{");
@@ -393,7 +393,7 @@ public class ReflectUtil {
             }
             if (object instanceof Collection) {
                 StringBuilder str = new StringBuilder("[");
-                for (Object listEntry : (Collection) object) {
+                for (Object listEntry : (Collection<?>) object) {
                     ReflectionResponse<String> response = getStringRepresentation(listEntry, useToString, toStringExceptions);
                     if (!response.hasResult()) {
                         return response;
